@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYPD Complaint Data: Persuasive Visualizations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .page {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            border-bottom: 3px solid #333;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #555;
+            margin-top: 25px;
+        }
+        .viz-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .viz-item {
+            flex: 1;
+            min-width: 400px;
+            text-align: center;
+        }
+        .viz-item img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            text-align: left;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .reflection {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        ul {
+            line-height: 1.6;
+        }
+        .deceptive {
+            color: #c0392b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Persuasive Data Visualizations: NYPD Complaint Data</h1>
+    
+    <!-- ============================================ -->
+    <!-- PAGE 1: PROPOSITION A -->
+    <!-- ============================================ -->
+    <div class="page">
+        <h2>Perspective A: "A Small Group of Problem Officers Causes Most Misconduct"</h2>
+        
+        <p><strong>Proposition:</strong> The NYPD doesn't have a systemic misconduct problem — it has a small number of repeat offenders who should be identified and removed. Focusing on these "few bad apples" would solve most of the issue.</p>
+        
+        <div class="viz-container">
+            <div class="viz-item">
+                <img src="page1_perspective_a.png" alt="Histogram and Stacked Bar Chart showing officer complaint distribution">
+            </div>
+        </div>
+        
+        <div class="caption">
+            <strong>Visualization 1 (Left - Histogram):</strong> Distribution of substantiated complaints per officer. 
+            The histogram shows that most officers with substantiated complaints have only 1, while a small number have 3, 5, or more. 
+            The annotation emphasizes that "most officers have only 1" and only a few officers have 3+.<br><br>
+            
+            <strong>Visualization 2 (Right - Stacked Bar Chart):</strong> Top 10 officers by complaint volume, broken down by outcome. 
+            Red represents substantiated complaints, gray represents not sustained. 
+            The percentage labels highlight each officer's "substantiation rate," making repeat offenders appear particularly problematic.
+        </div>
+        
+        <h3>Design Decisions & Deceptive Techniques</h3>
+        <ul>
+            <li><span class="deceptive">Truncated X-Axis (Histogram):</span> Cuts off after 8+ complaints, making the tail look more extreme and hiding that most officers cluster at 0-1</li>
+            <li><span class="deceptive">Cherry-Picked Data:</span> The histogram only shows officers WITH substantiated complaints, excluding ~72% of officers who have none</li>
+            <li><span class="deceptive">Color Psychology:</span> Red = substantiated (danger/bad), Gray = not sustained (neutral/ignorable). Red draws the eye and creates negative association</li>
+            <li><span class="deceptive">Percentage Labels:</span> Adding substantiation rate on each stacked bar suggests these officers are "more guilty" without context of complaint types or precinct conditions</li>
+            <li><span class="deceptive">Annotation Framing:</span> "Most officers have only 1" implies having more than 1 is abnormal, even though some precincts naturally generate more complaints</li>
+        </ul>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PAGE 2: OPPOSING PROPOSITION -->
+    <!-- ============================================ -->
+    <div class="page">
+        <h2>Perspective B: "The System/Context Is the Real Issue"</h2>
+        
+        <p><strong>Opposing Proposition:</strong> The vast majority of complaints are dismissed regardless of officer, precinct, or allegation type. This suggests either the complaint system is ineffective at holding officers accountable, or many complaints lack sufficient evidence. The problem is systemic, not individual.</p>
+        
+        <div class="viz-container">
+            <div class="viz-item">
+                <img src="page2_opposing.png" alt="Line graph and grouped bar chart showing complaint trends and precinct comparisons">
+            </div>
+        </div>
+        
+        <div class="caption">
+            <strong>Visualization 3 (Left - Line Graph):</strong> Complaint trends over time (2005-2019). 
+            The black line shows total complaints rising significantly, the gray line shows "not sustained" complaints also rising, 
+            while the red line shows substantiated complaints staying relatively flat. 
+            The annotation emphasizes that "total complaints increased but substantiated stayed flat."<br><br>
+            
+            <strong>Visualization 4 (Right - Grouped Bar Chart):</strong> Top 8 precincts by complaint volume, comparing substantiated (red) vs. not sustained (gray). 
+            Percentage labels show each precinct's substantiation rate. 
+            The annotation notes that all precincts have similar rates around 20-25%.
+        </div>
+        
+        <h3>Design Decisions & Deceptive Techniques</h3>
+        <ul>
+            <li><span class="deceptive">Y-Axis Not Starting at Zero (Line Graph):</span> The y-axis starts around 50-100 instead of 0, exaggerating the visual gap between total complaints and substantiated ones</li>
+            <li><span class="deceptive">Dual Narrative Framing:</span> "Complaints rose but substantiated stayed flat" ignores that more complaints could mean more reporting/transparency, not more misconduct</li>
+            <li><span class="deceptive">Grouped Bar Dominance:</span> Gray bars (not sustained) visually dominate red bars (substantiated), making substantiated complaints look small by comparison</li>
+            <li><span class="deceptive">Precinct Selection:</span> Only showing top 8 precincts by volume hides precincts with unusually high or low substantiation rates</li>
+            <li><span class="deceptive">Flat Red Line:</span> The substantiated line appears almost horizontal, even though it did increase from ~75 to ~100 per year (~33% growth)</li>
+        </ul>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PAGE 3: WRITEUP / REFLECTION -->
+    <!-- ============================================ -->
+    <div class="page reflection">
+        <h2>Reflection: Analysis of Persuasive Techniques</h2>
+        
+        <h3>Propositions Being Persuaded</h3>
+        <p><strong>Perspective A:</strong> A small percentage of officers are responsible for a disproportionate share of substantiated misconduct. These "repeat offenders" should be the focus of disciplinary resources. The NYPD has a "few bad apples" problem rather than a systemic issue.</p>
+        
+        <p><strong>Perspective B:</strong> The complaint system is ineffective at holding officers accountable (or generates many unprovable complaints). Complaint volume correlates with precinct activity, not officer quality. The problem is systemic, not individual.</p>
+        
+        <h3>Which Visualizations I'm Leaning Towards</h3>
+        <p><strong>For Perspective A:</strong> The stacked bar chart is particularly persuasive because it combines volume AND outcome in one view. The red substantiated bars popping against gray makes repeat officers look especially problematic. The histogram reinforces this by showing how rare multiple substantiated complaints are.</p>
+        
+        <p><strong>For Perspective B:</strong> The line graph effectively shows the divergence between total complaints and substantiated findings over time. Viewers immediately notice that the red line stays flat while other lines rise. The grouped bar chart makes precinct comparisons intuitive and suggests that "where you work" matters more than "who you are."</p>
+        
+        <h3>Overall Deceptive Strategy</h3>
+        <p>Both pages use <strong>real data</strong> and <strong>accurate numbers</strong> — the deception comes from:</p>
+        <ul>
+            <li><strong>What is included vs. excluded:</strong> Each page selectively shows data that supports its narrative while hiding contradictory evidence</li>
+            <li><strong>How data is framed:</strong> Colors, annotations, axis scales, and text labels guide viewers toward specific conclusions</li>
+            <li><strong>What story viewers are primed to see:</strong> The title and surrounding text set expectations before viewers examine the charts</li>
+        </ul>
+        
+        <h3>Key Deceptive Techniques Used Across Both Pages</h3>
+        <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 15px;">
+            <tr style="background: #f0f0f0;">
+                <th>Technique</th>
+                <th>How It's Used</th>
+                <th>Which Page</th>
+            </tr>
+            <tr>
+                <td>Truncated/Non-Zero Axes</td>
+                <td>Y-axis doesn't start at zero, exaggerating differences</td>
+                <td>Both</td>
+            </tr>
+            <tr>
+                <td>Cherry-Picking Data</td>
+                <td>Only showing subsets that support the narrative</td>
+                <td>Both</td>
+            </tr>
+            <tr>
+                <td>Color Psychology</td>
+                <td>Red for substantiated, gray for not sustained</td>
+                <td>Both</td>
+            </tr>
+            <tr>
+                <td>Annotation Framing</td>
+                <td>Text labels guide interpretation toward desired conclusion</td>
+                <td>Both</td>
+            </tr>
+            <tr>
+                <td>Stacked/Grouped Bar Framing</td>
+                <td>Visual comparison emphasizes one category over another</td>
+                <td>Both</td>
+            </tr>
+        </table>
+        
+        <p style="margin-top: 20px;"><strong>Data Source:</strong> NYPD Complaint Data (allegations_202007271729.csv)</p>
+    </div>
+
+</body>
+</html>
