@@ -1,208 +1,300 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NYPD Complaint Data: Persuasive Visualizations</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        .page {
-            background: white;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            border-bottom: 3px solid #333;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #555;
-            margin-top: 25px;
-        }
-        .viz-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .viz-item {
-            flex: 1;
-            min-width: 400px;
-            text-align: center;
-        }
-        .viz-item img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .caption {
-            font-style: italic;
-            color: #666;
-            margin-top: 10px;
-            text-align: left;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 4px;
-        }
-        .reflection {
-            background: #f0f7ff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        ul {
-            line-height: 1.6;
-        }
-        .deceptive {
-            color: #c0392b;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
+    <head>
+        <title>Project 2 Report – Persuasive or Deceptive Visualization?</title>
+        <style>
+            :root {
+                --color-neutral-95: hsl(220 10% 95%);
+                --color-neutral-90: hsl(220 10% 90%);
+                --color-neutral-80: hsl(220 10% 80%);
+                --color-neutral-70: hsl(220 10% 70%);
+                --color-neutral-60: hsl(220 10% 60%);
+                --color-neutral-50: hsl(220 10% 50%);
+                --color-neutral-40: hsl(220 10% 40%);
+                --color-neutral-30: hsl(220 10% 30%);
+                --color-neutral-20: hsl(220 10% 20%);
+                --color-neutral-10: hsl(220 10% 10%);
+            }
 
-    <h1>Persuasive Data Visualizations: NYPD Complaint Data</h1>
-    
-    <!-- ============================================ -->
-    <!-- PAGE 1: PROPOSITION A -->
-    <!-- ============================================ -->
-    <div class="page">
-        <h2>Perspective A: "A Small Group of Problem Officers Causes Most Misconduct"</h2>
-        
-        <p><strong>Proposition:</strong> The NYPD doesn't have a systemic misconduct problem — it has a small number of repeat offenders who should be identified and removed. Focusing on these "few bad apples" would solve most of the issue.</p>
-        
-        <div class="viz-container">
-            <div class="viz-item">
-                <img src="page1_perspective_a.png" alt="Histogram and Stacked Bar Chart showing officer complaint distribution">
-            </div>
-        </div>
-        
-        <div class="caption">
-            <strong>Visualization 1 (Left - Histogram):</strong> Distribution of substantiated complaints per officer. 
-            The histogram shows that most officers with substantiated complaints have only 1, while a small number have 3, 5, or more. 
-            The annotation emphasizes that "most officers have only 1" and only a few officers have 3+.<br><br>
+            html {
+                font: 100%/1.5 system-ui;
+                counter-reset: figure;
+                background: var(--color-neutral-95);
+                max-width: min(75vw, 80em);
+                margin: 0 auto;
+            }
+
+            /* Headings */
+
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                line-height: 1.1;
+                font-weight: 600;
+                text-wrap: balance;
+            }
+
+            h1,
+            h2 {
+                border-bottom: 1px solid var(--color-neutral-80);
+                padding-bottom: 0.2em;
+            }
+
+            h1 {
+                margin-block: 1em 0.5rem;
+                font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
+                font-weight: 800;
+
+                small {
+                    display: block;
+                    width: fit-content;
+                    padding: 0.2em 0.5em;
+                    margin-inline: auto;
+                    color: white;
+                    background: var(--color-neutral-40);
+                    font-size: 40%;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                }
+            }
+
+            h2 {
+                font-size: 180%;
+                color: var(--color-neutral-30);
+            }
+
+            h3 {
+                font-size: 130%;
+            }
+
+            /* Lists */
+
+            ul,
+            ol {
+                padding-inline-start: 2em;
+            }
+
+            li {
+                &::marker {
+                    color: var(--color-neutral-40);
+                }
+
+                + li {
+                    margin-top: 0.2em;
+                }
+            }
+
+            /* Sectioning elements */
+
+            header {
+                padding-block: 1em;
+                text-align: center;
+            }
+
+            main {
+                background: white;
+                color: var(--color-neutral-20);
+                border-radius: 1rem;
+                padding: 0.1rem 2rem;
+            }
+
+            /* Figures */
+
+            figure {
+                margin: 1em 0;
+                padding: 0.5rem;
+                margin-inline: -0.5em;
+                border: 1px solid var(--color-neutral-80);
+                box-shadow: 0 0.1em 0.2em var(--color-neutral-95);
+                text-align: center;
+                background: white;
+
+                > figcaption {
+                    font: 500 75% var(--font-sans);
+                    background: var(--color-neutral-95);
+                    padding: 0.5rem;
+                    margin: -0.5rem;
+                    margin-top: 0.5rem;
+                    counter-increment: figure;
+                    text-align: left;
+
+                    &::before {
+                        content: "Figure " counter(figure) ": ";
+                        font-weight: bold;
+                        color: var(--color-neutral-40);
+                    }
+
+                    a:not(:hover, :focus, :active) {
+                        color: inherit;
+                        text-decoration: underline;
+                        text-decoration-color: color-mix(
+                            in lab,
+                            currentColor,
+                            transparent 70%
+                        );
+                    }
+                }
+            }
+
+            /* Additional styling for list items to match original richness */
+            .viz-card {
+                background: #fafbfd;
+                border-radius: 20px;
+                padding: 1rem;
+                margin: 1rem 0;
+            }
+            .caption {
+                font-size: 0.95rem;
+                background: #f2f4fb;
+                padding: 0.8rem 1rem;
+                border-radius: 14px;
+                margin: 1rem 0;
+            }
+            .deceptive-list {
+                list-style-type: none;
+                padding-left: 0;
+            }
+            .deceptive-list li {
+                margin-bottom: 0.8rem;
+                padding-left: 1.8rem;
+                position: relative;
+            }
+            .deceptive-list li::before {
+                content: "●";
+                color: #b13e3e;
+                font-weight: bold;
+                position: absolute;
+                left: 0.2rem;
+                font-size: 1.2rem;
+            }
+            .technique-tag {
+                background: #ffe9e9;
+                color: #a12b2b;
+                font-weight: 700;
+                padding: 0.1rem 0.5rem;
+                border-radius: 12px;
+                margin-right: 0.3rem;
+                font-size: 0.85rem;
+                display: inline-block;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 1.2rem 0;
+                background: white;
+                border-radius: 14px;
+                overflow: hidden;
+            }
+            th {
+                background: #eef1f9;
+                font-weight: 600;
+                padding: 0.7rem 1rem;
+                text-align: left;
+            }
+            td {
+                padding: 0.7rem 1rem;
+                border-bottom: 1px solid #e9ecf5;
+            }
+            .reflection-box {
+                background: #f6f9fe;
+                padding: 1.5rem;
+                border-radius: 20px;
+                margin: 1.5rem 0;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>
+                <small>Project 2</small>
+                Persuasive or Deceptive Visualization?
+            </h1>
+
+            <p><strong>Jack Ding, Nathan Su, Calvin Truong, & Jake Wanderer</strong> — <em>jading@ucsd.edu, nlsu@ucsd.edu, cat020@ucsd.edu, jwanderer@ucsd.edu</em></p>
+        </header>
+
+        <main>
+            <h2>Proposition: NYPD misconduct – two contrasting narratives</h2>
             
-            <strong>Visualization 2 (Right - Stacked Bar Chart):</strong> Top 10 officers by complaint volume, broken down by outcome. 
-            Red represents substantiated complaints, gray represents not sustained. 
-            The percentage labels highlight each officer's "substantiation rate," making repeat offenders appear particularly problematic.
-        </div>
-        
-        <h3>Design Decisions & Deceptive Techniques</h3>
-        <ul>
-            <li><span class="deceptive">Truncated X-Axis (Histogram):</span> Cuts off after 8+ complaints, making the tail look more extreme and hiding that most officers cluster at 0-1</li>
-            <li><span class="deceptive">Cherry-Picked Data:</span> The histogram only shows officers WITH substantiated complaints, excluding ~72% of officers who have none</li>
-            <li><span class="deceptive">Color Psychology:</span> Red = substantiated (danger/bad), Gray = not sustained (neutral/ignorable). Red draws the eye and creates negative association</li>
-            <li><span class="deceptive">Percentage Labels:</span> Adding substantiation rate on each stacked bar suggests these officers are "more guilty" without context of complaint types or precinct conditions</li>
-            <li><span class="deceptive">Annotation Framing:</span> "Most officers have only 1" implies having more than 1 is abnormal, even though some precincts naturally generate more complaints</li>
-        </ul>
-    </div>
+            <!-- ========== PERSPECTIVE A (FOR the proposition: "few bad apples") ========== -->
+            <section>
+                <h3>FOR the Proposition: “Only a few officers cause harm toward the lives of citizens”</h3>
 
-    <!-- ============================================ -->
-    <!-- PAGE 2: OPPOSING PROPOSITION -->
-    <!-- ============================================ -->
-    <div class="page">
-        <h2>Perspective B: "The System/Context Is the Real Issue"</h2>
-        
-        <p><strong>Opposing Proposition:</strong> The vast majority of complaints are dismissed regardless of officer, precinct, or allegation type. This suggests either the complaint system is ineffective at holding officers accountable, or many complaints lack sufficient evidence. The problem is systemic, not individual.</p>
-        
-        <div class="viz-container">
-            <div class="viz-item">
-                <img src="page2_opposing.png" alt="Line graph and grouped bar chart showing complaint trends and precinct comparisons">
-            </div>
-        </div>
-        
-        <div class="caption">
-            <strong>Visualization 3 (Left - Line Graph):</strong> Complaint trends over time (2005-2019). 
-            The black line shows total complaints rising significantly, the gray line shows "not sustained" complaints also rising, 
-            while the red line shows substantiated complaints staying relatively flat. 
-            The annotation emphasizes that "total complaints increased but substantiated stayed flat."<br><br>
-            
-            <strong>Visualization 4 (Right - Grouped Bar Chart):</strong> Top 8 precincts by complaint volume, comparing substantiated (red) vs. not sustained (gray). 
-            Percentage labels show each precinct's substantiation rate. 
-            The annotation notes that all precincts have similar rates around 20-25%.
-        </div>
-        
-        <h3>Design Decisions & Deceptive Techniques</h3>
-        <ul>
-            <li><span class="deceptive">Y-Axis Not Starting at Zero (Line Graph):</span> The y-axis starts around 50-100 instead of 0, exaggerating the visual gap between total complaints and substantiated ones</li>
-            <li><span class="deceptive">Dual Narrative Framing:</span> "Complaints rose but substantiated stayed flat" ignores that more complaints could mean more reporting/transparency, not more misconduct</li>
-            <li><span class="deceptive">Grouped Bar Dominance:</span> Gray bars (not sustained) visually dominate red bars (substantiated), making substantiated complaints look small by comparison</li>
-            <li><span class="deceptive">Precinct Selection:</span> Only showing top 8 precincts by volume hides precincts with unusually high or low substantiation rates</li>
-            <li><span class="deceptive">Flat Red Line:</span> The substantiated line appears almost horizontal, even though it did increase from ~75 to ~100 per year (~33% growth)</li>
-        </ul>
-    </div>
+                <figure>
+                    <img src="images/Figure_1.png" alt="Officer complaint distribution and top 10 stacked outcomes" style="max-width:100%;" />
+                    <figcaption>LEFT VISUAL: distribution among substantiated complaints per officers (skewed toward the right). RIGHT VISUAL: complain volume colored by substantiated vs. not sustained complaints for the top 10 harmful officers.</figcaption>
+                </figure>
 
-    <!-- ============================================ -->
-    <!-- PAGE 3: WRITEUP / REFLECTION -->
-    <!-- ============================================ -->
-    <div class="page reflection">
-        <h2>Reflection: Analysis of Persuasive Techniques</h2>
-        
-        <h3>Propositions Being Persuaded</h3>
-        <p><strong>Perspective A:</strong> A small percentage of officers are responsible for a disproportionate share of substantiated misconduct. These "repeat offenders" should be the focus of disciplinary resources. The NYPD has a "few bad apples" problem rather than a systemic issue.</p>
-        
-        <p><strong>Perspective B:</strong> The complaint system is ineffective at holding officers accountable (or generates many unprovable complaints). Complaint volume correlates with precinct activity, not officer quality. The problem is systemic, not individual.</p>
-        
-        <h3>Which Visualizations I'm Leaning Towards</h3>
-        <p><strong>For Perspective A:</strong> The stacked bar chart is particularly persuasive because it combines volume AND outcome in one view. The red substantiated bars popping against gray makes repeat officers look especially problematic. The histogram reinforces this by showing how rare multiple substantiated complaints are.</p>
-        
-        <p><strong>For Perspective B:</strong> The line graph effectively shows the divergence between total complaints and substantiated findings over time. Viewers immediately notice that the red line stays flat while other lines rise. The grouped bar chart makes precinct comparisons intuitive and suggests that "where you work" matters more than "who you are."</p>
-        
-        <h3>Overall Deceptive Strategy</h3>
-        <p>Both pages use <strong>real data</strong> and <strong>accurate numbers</strong> — the deception comes from:</p>
-        <ul>
-            <li><strong>What is included vs. excluded:</strong> Each page selectively shows data that supports its narrative while hiding contradictory evidence</li>
-            <li><strong>How data is framed:</strong> Colors, annotations, axis scales, and text labels guide viewers toward specific conclusions</li>
-            <li><strong>What story viewers are primed to see:</strong> The title and surrounding text set expectations before viewers examine the charts</li>
-        </ul>
-        
-        <h3>Key Deceptive Techniques Used Across Both Pages</h3>
-        <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 15px;">
-            <tr style="background: #f0f0f0;">
-                <th>Technique</th>
-                <th>How It's Used</th>
-                <th>Which Page</th>
-            </tr>
-            <tr>
-                <td>Truncated/Non-Zero Axes</td>
-                <td>Y-axis doesn't start at zero, exaggerating differences</td>
-                <td>Both</td>
-            </tr>
-            <tr>
-                <td>Cherry-Picking Data</td>
-                <td>Only showing subsets that support the narrative</td>
-                <td>Both</td>
-            </tr>
-            <tr>
-                <td>Color Psychology</td>
-                <td>Red for substantiated, gray for not sustained</td>
-                <td>Both</td>
-            </tr>
-            <tr>
-                <td>Annotation Framing</td>
-                <td>Text labels guide interpretation toward desired conclusion</td>
-                <td>Both</td>
-            </tr>
-            <tr>
-                <td>Stacked/Grouped Bar Framing</td>
-                <td>Visual comparison emphasizes one category over another</td>
-                <td>Both</td>
-            </tr>
-        </table>
-        
-        <p style="margin-top: 20px;"><strong>Data Source:</strong> NYPD Complaint Data (allegations_202007271729.csv)</p>
-    </div>
+                <div class="caption">
+                    <strong>LEFT Visual Summary:</strong> We can see that the histogram is drastically skewed to the right. From this, we understand that among all officers, a majority of them have very few complaints, with only a handful having more complaints than others.<br>
+                    <strong>RIGHT Visual Summary:</strong> Here, this visual helps one understand that many among the biggest repeat offenders have a massive substantiated rate for their complaints in comparison to the majority of officers. It's seen here that those who repetitively have complaints filed are often the ones that stack up complaints and overwhelm the distribution.
+                </div>
 
-</body>
+                <p><strong>Design Decisions and Rationale (persuasive moves + deceptive techniques):</strong></p>
+                <ul class="deceptive-list">
+                    <li><span class="technique-tag">cherry-picking</span> <strong>Truncated histogram &amp; hidden officers.</strong> The distribution only highlights officers with substantiated complaints. This actually prevents an audience from seeing the quantity of officers who do not have any filed complaints at all. This exclusion can inflate the proportion of harmful officers by shrinking the distribution to show a greater fraction of problematic officers. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">truncated axis</span> <strong>Y-axis starts above zero (stacked bar).</strong> The second chart begins above zero so the tallest officer bar seems to be much larger than the rest of the officers, which vastly amplifies the gap between the top (offending) officer and others. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">color framing</span> <strong>Red = substantiated, gray = not sustained.</strong> Selecting the color of red typically draws attention toward negative feelings and associations. On the other hand, gray recedes more into the background, which can highlight to a greater extent the impact of the substantiated complaints. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">annotation slant</span> <strong>“Most officers have only 1” narrative.</strong> Promoting this phrase allows one to perceive having anything more than one substantiated complaint as unnatural. We are able to show to a greater level that those who have multiple are part of the problem of how only a fraction of officers corrupt the law enforcement system, despite context regarding the particular precincts not being included. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">cherry-picked (but for the top 10 offending officers)</span> <strong>Focus on extreme outliers.</strong> Only displaying the top 10 officers overwhelms the actual full representation of officers and demonstrates the issue of only a handful of officers being problematic better. <strong>Diverging Scale Score: 0</strong></li>
+                </ul>
+                <p style="font-style:italic; margin-top:0.2rem;">Using these design decisions, emphasis on a small fraction of bad officers in the law enforcement system can seem like the better case. However, it is only with these deceptive techniques can one easily side with this argument.</p>
+            </section>
+
+            <!-- ========== PERSPECTIVE B (AGAINST the proposition: systemic reform needed) ========== -->
+            <section>
+                <h3>AGAINST the Proposition: “The entire law enforcement system needs to be reformed to prevent harm toward citizens”</h3>
+
+                <figure>
+                    <img src="images/Figure_2.png" alt="Complaint trend over time and precinct comparison of substantiated vs not sustained" style="max-width:100%;" />
+                    <figcaption>LEFT VISUAL: steep upward trend for the total number of complaints across all precincts for each year. RIGHT VISUAL: Top reported precincts comparing substantiated complaints vs. not sustained complaints.</figcaption>
+                </figure>
+
+                <div class="caption">
+                    <strong>LEFT Visual Summary:</strong> We can see how entire precincts are the root of problems in the law enforcement system, showing how that upward trend can't be explained by just a couple of bad officers, but by entire teams.<br>
+                    <strong>RIGHT Visual Summary:</strong> Entire precincts can be seen as a problem in this visual as the top ten precincts that are often complained about demonstrate a consistent gap between substantiated complaints and not sustained complaints.
+                </div>
+
+                <p><strong>Design Decisions and Rationale (deceptive moves for systemic argument):</strong></p>
+                <ul class="deceptive-list">
+                    <li><span class="technique-tag">aspect ratio</span> <strong>Steep line chart slope.</strong> With a taller and narrow aspect ratio in the left visual, the rising amount of complaints is greatly emphasized and exaggerated, which can seem more problematic than one would anticipate. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">unnormalized data</span> <strong>Precinct totals not adjusted for size.</strong> By comparing the different precincts to one another, an audience can be deceived as complaints are not proportional. In reality, bigger precincts with more officers will have more complaints, which can overwhelm other precincts even if they have a lower ratio of complaint-to-officer. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">y-axis start</span> <strong>Line chart doesn't start at 0.</strong> Since the line chart doesn't actually begin at 0, the visual may seem more stretched for the total complaints and substantiated complaints. This can lead one to perceive the sharp increase of trends than greater than it actually is. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">color consistency</span> <strong>Gray dominates red.</strong> With both of these visuals, gray can be seen as appearing more often and taking more space than red. Overall, it can be seen as the entire system of precincts often not pursuing and resolving complaints by owning up to actions. <strong>Diverging Scale Score: 0</strong></li>
+                    <li><span class="technique-tag">precinct selection</span> <strong>Only top precincts shown.</strong> The problem can be seen as more systemic due to the fact that highest volumes of complaints are demonstrated through precincts, which can prevent distributions for precincts out of the top 10 to not be highlighted. As a result, an audience would think it is more uniform to see problems amount all precincts, and would not acknowledge the possibility that other precincts might not show evidence of responsibility for citizens' complaints. <strong>Diverging Scale Score: 0</strong></li>
+                </ul>
+                <p style="font-style:italic; margin-top:0.2rem;">With the influence of time trends and comparisons (involving the different precincts), we can argue that the entire law enforcement system, not just a few bad officers, actually are responsible for harmful environments for citizens</p>
+            </section>
+
+            <!-- ========== FINAL REFLECTION (full write‑up, tables, reflection from index.html) ========== -->
+            <section>
+                <h2>Final Reflection</h2>
+                
+                <div class="reflection-box">
+                    <h3 style="border-left-color:#3f4b7a;">The Propositions...</h3>
+                    <p><strong>Perspective A (FOR the proposition):</strong> Only a small number part of the law enforcement system create harmful environments for citizens, demonstrating a concentrated issue rather than a systemic one./p>
+                    <p><strong>Perspective B (AGAINST the proposition):</strong> The entire law enforcement system is responsible for the harmful environment that citizens live in. Increases in complaints across precincts and gaps in substantiation complaints require not just some officers to be reformed, but the whole entire system. </p>
+
+                    <h3 style="border-left-color:#3f4b7a;">Which Perspective Has A Stronger Argument?</h3>
+                    <p>Perspective B carries a stronger argument at the moment. With its visuals, the inclusion of time to reinforce its impact with trends displays that a problem across the entire legal system continues to grow worse and worse by the year. With the second visual, it also demonstrates more evidence toward a need to reform entire systems as consistent gaps among substantiated and not sustained complaints suggest an overall issue with precincts rather than just a handful of bad officers sine it is impossible to explain these consistencies using only a fraction of individuals' behaviors. These two visuals support Perspective B much stronger than Perspective A that even though visuals from Perspective A do make some good points, the path to creating a better environment for citizens must start with resolving conflict from Perspective B.</p>
+
+                    <h3 style="border-left-color:#3f4b7a;">Overall Conclusion</h3>
+                    <p>In the first set of visuals, we see a set of perspectives from the visualizations that indicate the argument that the whole entire law enforcement system is not a problem, but rather just a couple dozen officers that create a harmful and negative experience for citizens. As seen from the first set of visuals, one visual shows how the distribution of complaints for officers are skewed to the right, which represents that officers typically don’t have that many misconduct complaints associated with them and only a small number of officers have a great sum of complaints. The other visual in the same set of visuals shows officers with the greatest number of complaints tend to have a relatively high substantiated complaint outcome to show how many misconduct complaints truly go through. We can see how it is specifically that officers, especially those with a great amount of complaints, often have cases followed through where they seem to be practicing some sort of discrimination, reinforcing the fact only a fraction of the law enforcement system needs more accountability to fix the wrongdoings committed onto citizens.
+</p>
+                    <p>As for the second set of visuals, it shows two visuals that mean to represent how all precincts in the dataset show a sharp increase/trend in the number of complaints for which citizens report and how there is a good proportion of substantiated complaint outcomes that come with each of the top most reported precincts (similar to one of the visuals in the previous section), respectively. That being said, we understand here that it isn’t just the individual bad officers who are creating a harmful impact on citizens, but it is actually the entire law enforcement system. Trends are common among entire precincts that wouldn’t be seen if only a couple of officers out of the whole entire precinct were causing issues, which demonstrates the need for a reformed law enforcement system for the wellbeing of citizens. As of right now, the set of visualizations that seem to hold a stronger argument is that of preference B (or the two visuals of the second set). To start off, the first visual (left-side) seems to be stronger in conveying the proposition due to the fact that it incorporates time into the context to show how impactful the harmful effects of the entire law enforcement system is, which is arguably better than just displaying a distribution of officers and the amount of complaints that they have. In addition, the second visual of that set incorporates comparisons to precincts, which can show greater depth of impact compared to just comparing individual officers. On top of that, there are pretty consistent gaps between the two types of complaints that can reinforce the fact that systems greatly correlate with the impact of entire systems.
+</p>
+                    <p>Moving on, some of the deceptive techniques that can be seen in the first set of visuals/perspective A is the idea of cherry-picking and truncating the y-axis. We are able to see with the concept of cherry-picking a great amount of complaints among the top harmful officers, which may not be representative of all officers because the entire distribution is hidden. On top of that, we made it so the visuals actually start with bar charts above zero (this is for the second visual of the first set of visuals), which is able to highlight how harmful the first officer is in comparison to the other officers presented there. On the other hand, perspective B’s visualizations introduce some concepts in aspect ratio choices and unnormalized precinct data. Respectively, they are meant to highlight how steep the first chart is (which can help one interpret just how many complaints are received collectively), and having unnormalized precinct data can display bigger precincts that will typically have more complaints (which would not be very proportional compared to smaller precincts that will obviously have less complaints). To conclude, we are currently siding with the idea that law enforcement systems as a whole need to be reformed due to the level of impact their complaints have caused, and we will continue to explore different concepts to further strengthen our argument.</p>
+                    
+                    <hr>
+        
+                </div>
+            </section>
+        </main>
+    <!-- Cloudflare analytics snippet (preserved from original template) -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"c822b88e119346678db149ed7b7721c9","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    </body>
 </html>
