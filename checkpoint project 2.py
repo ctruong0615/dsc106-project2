@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load data
-df = pd.read_csv(r"C:\Users\natha\Documents\GitHub\dsc106-project2\allegations.csv")
+df = pd.read_csv(r"allegations.csv")
 
 # Helper for substantiated
 def is_substantiated(disp):
@@ -26,7 +26,7 @@ ax1 = axes1[0]
 
 sub_counts = df[df['substantiated']].groupby('unique_mos_id').size()
 
-ax1.hist(sub_counts, bins=range(1, int(sub_counts.max()) + 2), 
+ax1.hist(sub_counts, bins=range(1, int(sub_counts.max()) + 2),
          color='#D32F2F', edgecolor='black', alpha=0.7, rwidth=0.85)
 ax1.set_xlabel('Number of Substantiated Complaints', fontsize=11)
 ax1.set_ylabel('Number of Officers', fontsize=11)
@@ -77,7 +77,7 @@ ax3 = axes2[0]
 
 # Prepare yearly data
 df['year'] = pd.to_numeric(df['year_received'], errors='coerce')
-yearly_data = df[df['year'].between(2005, 2019)].groupby('year').agg({
+yearly_data = df[df['year'].between(2005, 2018)].groupby('year').agg({
     'complaint_id': 'count',
     'substantiated': 'sum'
 })
